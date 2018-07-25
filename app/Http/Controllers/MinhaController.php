@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+
+//Importação da Request
+use App\Http\Requests\CriarProduto;
+
 use App\Produto;
 
 class MinhaController extends Controller
@@ -15,8 +20,18 @@ class MinhaController extends Controller
 
     }
 
-
-    public function criarProduto(Request $request) {
+    public function criarProduto(CriarProduto $request) {
+      //Validation withour Request
+//      $validator = Validator::make($request->all(), [
+//        'nome' => 'required|alpha',
+//        'tipo' => 'alpha',
+//        'preco' => 'required|numeric|min:0',
+//        'quantidade' => 'required|integer|min:0'
+//
+//      ]);
+//      if ($validator->fails()) {
+//     return response()->json($validator->errors());
+//      }
 
       $novoProduto = new Produto;
 
@@ -31,7 +46,7 @@ class MinhaController extends Controller
 
     }
 
-    public function atualizarProduto(Request $request, $id) {
+    public function atualizarProduto(CriarProduto $request, $id) {
 
       $produto = Produto::findorfail($id);
 
